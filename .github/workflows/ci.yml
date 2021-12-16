@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: E2E tests
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  cypress-run:
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,25 +19,21 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        # Environment variables
+      - name: Checkout Node.js ${{ matrix.node-version }}
+        uses: actions/checkout@v2
+
+      - name: E2E on Chrome
+        uses: cypress-io/github-action@v2
         env:
-          USER_NAME: ${{ secrets.USER_NAME }}
-          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-        uses: actions/setup-node@v2
+          CYPRESS_USER_NAME: ${{ secrets.USER_NAME }}
+          CYPRESS_USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: |
-          echo "$USER_NAME"
-          echo "$USER_PASSWORD"
-      - run: npm ci
-      - run: npm test
-      - name: Upload test results
-        uses: actions/upload-artifact@master
+          browser: chrome
+          headless: true
+
+      - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: Test results
+          name: cypress-reports
           path: reports
           retention-days: 2
