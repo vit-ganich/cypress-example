@@ -15,6 +15,5 @@ import dotenvPlugin from 'cypress-dotenv';
 // eslint-disable-next-line no-unused-vars
 export default (on: any, config: Cypress.PluginConfigOptions) => {
   config = dotenvPlugin(config);
-
   return config;
 };
