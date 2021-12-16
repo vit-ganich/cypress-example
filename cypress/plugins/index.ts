@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-import loadDotenvConfig from './loadDotenvConfig';
-
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -12,7 +10,10 @@ import loadDotenvConfig from './loadDotenvConfig';
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
+import dotenvPlugin from 'cypress-dotenv';
+
 // eslint-disable-next-line no-unused-vars
 export default (on: any, config: Cypress.PluginConfigOptions) => {
-  return loadDotenvConfig(config);
+  config = dotenvPlugin(config);
+  return config;
 };
