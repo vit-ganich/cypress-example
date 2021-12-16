@@ -9,12 +9,8 @@ describe('example to-do app', () => {
 
   it('shows environment variables', () => {
     // Examle of accessing the environment variables from Cypress.env
-    cy.log(JSON.stringify(Cypress.env));
-    console.log(Cypress.env);
     cy.wrap(Cypress.env('USER_NAME')).should('equal', 'test');
-
-    const userName = process.env.USER_NAME || 'empty';
-    cy.wrap(userName).should('equal', '123');
+    cy.wrap(Cypress.env('USER_PASSWORD')).should('equal', '123');
   });
 
   it('displays two todo items by default', () => {
