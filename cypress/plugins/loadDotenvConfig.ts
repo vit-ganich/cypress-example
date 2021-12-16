@@ -16,7 +16,7 @@ export default function (
 ) {
   const configWithDotenv = dotenv.config({ path });
   if (configWithDotenv.error) {
-    throw configWithDotenv.error;
+    return config;
   }
 
   const env = { ...config.env, ...configWithDotenv.parsed };

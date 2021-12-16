@@ -9,7 +9,10 @@ describe('example to-do app', () => {
 
   it('shows environment variables', () => {
     // Examle of accessing the environment variables from Cypress.env
-    cy.log(Cypress.env('USER'));
+    cy.log(Cypress.env('USER_NAME'));
+
+    const userName = process.env.USER_NAME || 'empty';
+    cy.log(userName);
   });
 
   it('displays two todo items by default', () => {
