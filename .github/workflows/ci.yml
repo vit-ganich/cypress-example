@@ -30,8 +30,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: |
-          echo ${USER_NAME}
-          echo ${USER_PASSWORD}
+          echo $USER_NAME
+          echo $USER_PASSWORD
       - run: npm ci
       - run: npm test
       - name: Upload test results
