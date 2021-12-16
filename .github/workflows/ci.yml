@@ -30,8 +30,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
+      - run: |
+          echo ${#USER_NAME}
+          echo ${#USER_PASSWORD}
       - run: npm test
-
       - name: Upload test results
         uses: actions/upload-artifact@master
         if: always()
