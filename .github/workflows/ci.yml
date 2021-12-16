@@ -32,3 +32,10 @@ jobs:
       - run: npm ci
       - run: echo ${{ secrets.USER_NAME }}
       - run: npm test
+
+      - name: Upload Mochawesome report
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: Mochawesome report
+          path: reports
