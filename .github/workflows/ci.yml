@@ -30,12 +30,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: echo ${{ secrets.USER_NAME }}
       - run: npm test
 
-      - name: Upload Mochawesome report
+      - name: Upload test results
         uses: actions/upload-artifact@master
         if: always()
         with:
-          name: Mochawesome report
+          name: Test results
           path: reports
+          retention-days: 2
