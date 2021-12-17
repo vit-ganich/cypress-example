@@ -15,3 +15,25 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+
+Cypress.on(
+  'test:after:run',
+  (test: Cypress.ObjectLike, runnable: Mocha.Test) => {
+    if (test.state === 'failed') {
+      attachScreenshot(test, runnable);
+    }
+  },
+);
+
+/**
+ * Attach a screenshot to Mochawesome report
+ * @param test
+ * @param runnable
+ */
+function attachScreenshot(test: Cypress.ObjectLike, runnable: Mocha.Test) {
+  const addContext = require('mochawesome/addContext');
+  const title = runnable.parent?.title;
+  const screenshotsFolder = Cypress.config('screenshotsFolder');
+  const screenshot = `${screenshotsFolder}/${Cypress.spec.name}/${title} -- ${test.title} (failed).png`;
+  addContext({ test }, screenshot);
+}
