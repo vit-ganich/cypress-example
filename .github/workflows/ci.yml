@@ -37,4 +37,4 @@ jobs:
         with:
           name: cypress-reports
           path: reports
-          retention-days: 2
+          retention-days: 30
