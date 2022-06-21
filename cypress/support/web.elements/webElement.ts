@@ -1,11 +1,19 @@
 export default class WebElement {
   protected _selector: string | keyof HTMLElementTagNameMap;
+  /**
+   * Search for element contains a text using cy.contains
+   */
   protected contains: boolean = false;
 
   get selector() {
     return this._selector;
   }
 
+  /**
+   *
+   * @param selector string selector
+   * @param options flag to search for containing text
+   */
   constructor(
     selector: string | keyof HTMLElementTagNameMap,
     { contains = false } = {},
