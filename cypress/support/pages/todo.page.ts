@@ -5,7 +5,13 @@ import BasePage from './base.page';
  * Page object for Todo page
  */
 class TodoPage extends BasePage {
-  url = '/todo';
+  waitForLoad(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  constructor() {
+    super('/todo');
+  }
 
   //#region Web elements
   todoList = new WebElement('.todo-list li');
