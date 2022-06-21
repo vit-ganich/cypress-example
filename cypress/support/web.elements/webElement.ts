@@ -22,6 +22,11 @@ export default class WebElement {
     this.contains = contains;
   }
 
+  /**
+   * Find an element using cy.get()
+   * @param options
+   * @returns
+   */
   get(
     options?: Partial<
       Cypress.Loggable &
@@ -34,5 +39,16 @@ export default class WebElement {
       return cy.contains(this._selector, options);
     }
     return cy.get(this._selector, options);
+  }
+
+  /**
+   * Click on the element
+   * @param options
+   * @returns
+   */
+  click(
+    options?: Partial<Cypress.ClickOptions>,
+  ): Cypress.Chainable<JQuery> | Cypress.Chainable<undefined> {
+    return this.get().click(options);
   }
 }
